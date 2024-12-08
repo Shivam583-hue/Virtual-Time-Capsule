@@ -14,7 +14,7 @@ A virtual time capsule unlike a physical capsule uses a database to store images
 
 2. **You will be notified when the time capsule is unsealed**  
 
-3. **Share your unsealed time capsule on any social media by just coping a post that will be generated after unsealing **   
+3. Share your unsealed time capsule on any social media by just coping a post that will be generated after unsealing    
   
 
 ---
@@ -23,14 +23,7 @@ A virtual time capsule unlike a physical capsule uses a database to store images
 🌐 [**Opportune Hub on Render**](https://opportune-hub-backend.onrender.com/)  
 _Note: Render’s free tier may result in slower loading times._
 
----
 
-## **🧑‍💻 Test Credentials**
-If you'd like to explore the platform, use the following credentials:  
-```plaintext
-Email: yaadnhi@gmail.com  
-Password: 123456
-```
 
 ---
 
