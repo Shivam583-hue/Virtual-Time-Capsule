@@ -1,0 +1,1 @@
+{"root":["./src/DatabaseCalls.ts","./src/db.ts","./src/index.ts","./src/schema.ts","./src/controllers/auth.controller.ts","./src/routes/auth.route.ts"],"version":"5.7.2"}
