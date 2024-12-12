@@ -1,4 +1,5 @@
 import cors from "cors";
+import client from "prom-client";
 import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
@@ -24,4 +25,11 @@ app.use(
     optionsSuccessStatus: 204,
   }),
 );
+
+app.get("/metrics", async (req, res) => {
+  const metrics = await client.register.metrics();
+  res.set("Content-Type", client.register.contentType);
+  res.end(metrics);
+});
+
 app.listen(5000, () => console.log("Server running on http://localhost:5000"));
