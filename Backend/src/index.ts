@@ -1,5 +1,6 @@
 import cors from "cors";
 import client from "prom-client";
+import { metricsMiddleware } from "./metrics";
 import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
@@ -8,6 +9,7 @@ dotenv.config();
 
 const app = express();
 app.use(cookieParser());
+app.use(metricsMiddleware);
 app.use(
   cors({
     origin: "http://localhost:5173",
