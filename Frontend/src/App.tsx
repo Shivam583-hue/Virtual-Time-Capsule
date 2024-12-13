@@ -1,5 +1,5 @@
-import Logout from "@/Logout";
 import Home from "@/Pages/Home/Home";
+import Navbar from "@/Pages/Nabar/Navbar";
 
 import { Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
@@ -9,11 +9,11 @@ function App() {
   const { authUser } = useAuthContext();
 
   return (
-    <div className="bg-[#161a26]  h-screen w-full">
+    <div className=" h-screen w-full bg-gradient-to-b from-gray-900 via-[#2A2640] to-[#1E1B2F]">
       <Routes>
         <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Navbar />}></Route>
       </Routes>
-      <Logout />
       <Toaster />
     </div>
   );
