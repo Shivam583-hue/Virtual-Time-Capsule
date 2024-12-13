@@ -1,9 +1,11 @@
 import { controllerB, controllerC } from "../controllers/auth.controller";
+import jwt from "jsonwebtoken";
+import { Request, Response } from "express";
 import express from "express";
 import { v4 as uuidv4 } from "uuid";
 import passport from "passport";
 import cookieParser from "cookie-parser";
-import { Strategy as GoogleStrategy, Profile } from "passport-google-oauth20";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { upsertUser, getUserByID } from "../DatabaseCalls";
 import { InsertUserType } from "../schema";
 
@@ -63,5 +65,20 @@ router.get(
   controllerB,
 );
 router.get("/logout", controllerC);
+
+router.get("/user/me", (async (req: Request, res: Response) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) return res.status(401).json({ message: "Unauthorized" });
+
+    const decoded: any = jwt.verify(token, process.env.JWT_SECRET!);
+    const user = await getUserByID(decoded.id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}) as express.RequestHandler);
 
 export default router;

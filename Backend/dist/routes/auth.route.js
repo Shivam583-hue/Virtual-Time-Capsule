@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const auth_controller_1 = require("../controllers/auth.controller");
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const express_1 = __importDefault(require("express"));
 const uuid_1 = require("uuid");
 const passport_1 = __importDefault(require("passport"));
@@ -59,4 +60,19 @@ passport_1.default.deserializeUser((id, done) => __awaiter(void 0, void 0, void 
 router.get("/auth/google", passport_1.default.authenticate("google", { scope: ["profile", "email"] }));
 router.get("/auth/google/callback", passport_1.default.authenticate("google", { session: false }), auth_controller_1.controllerB);
 router.get("/logout", auth_controller_1.controllerC);
+router.get("/user/me", ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const token = req.cookies.token;
+        if (!token)
+            return res.status(401).json({ message: "Unauthorized" });
+        const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
+        const user = yield (0, DatabaseCalls_1.getUserByID)(decoded.id);
+        if (!user)
+            return res.status(404).json({ message: "User not found" });
+        res.json(user);
+    }
+    catch (error) {
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+})));
 exports.default = router;

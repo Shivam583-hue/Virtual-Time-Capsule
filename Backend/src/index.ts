@@ -4,6 +4,7 @@ import { metricsMiddleware } from "./metrics";
 import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
+import authRoute from "./routes/auth.route";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use(
     optionsSuccessStatus: 204,
   }),
 );
+app.use("/api", authRoute);
 
 app.get("/metrics", async (req, res) => {
   const metrics = await client.register.metrics();
