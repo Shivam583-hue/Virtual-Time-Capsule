@@ -2,7 +2,7 @@ import Login from "@/Login";
 
 const Home = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-[#10151A] to-[#00c6ff]  text-gray-300">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-900 via-[#2A2640] to-[#1E1B2F]  text-gray-300">
       <div className="max-w-4xl w-full p-8 md:p-12 shadow-lg bg-gray-800 bg-opacity-60 rounded-xl backdrop-blur-lg text-center space-y-6">
         <h1 className="text-4xl md:text-5xl font-bold leading-tight">
           Welcome to Samay Capsule!
@@ -24,7 +24,7 @@ const Home = () => {
           stranger’s. Click below, sign in, and let’s get you started on your
           time-bending journey!
         </p>
-        <p className="text-lg md:text-xl font-bold text-yellow-400">
+        <p className="text-lg md:text-xl font-bold text-[#507ca9]">
           What are you waiting for? Your future self is probably already
           wondering what the heck you're up to. Go ahead and sign in!
         </p>
