@@ -22,14 +22,13 @@ const CreateCapsule = () => {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="h-[600px] rounded-xl w-full sm:w-[500px] md:w-[800px] bg-black bg-opacity-60 text-white shadow-lg flex flex-col">
-        {/* Header */}
+      <div className="h-[640px] rounded-xl w-full sm:w-[500px] md:w-[800px] bg-black bg-opacity-60 text-white shadow-lg flex flex-col">
         <div className="flex justify-around border-b border-[#6771b9] py-4">
           <h1
             onClick={handleText}
             className={`${baseClass} ${isText ? activeClass : inactiveClass}`}
           >
-            Add Text
+            Add Note
           </h1>
           <h1
             onClick={handleFiles}
@@ -38,7 +37,6 @@ const CreateCapsule = () => {
             Upload Image
           </h1>
         </div>
-
         <div className="flex-1 p-4">
           {isFile ? (
             <div className="flex justify-center items-center h-full">
@@ -63,19 +61,28 @@ const CreateCapsule = () => {
           ) : (
             <textarea
               className="w-full h-full bg-transparent text-white border border-[#6771b9] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-md p-3 resize-none placeholder-gray-400 focus:outline-none"
-              placeholder="Write a note to your future self"
+              placeholder="✎  Write a note to your future self"
             />
           )}
         </div>
 
         <div className="px-4 pb-4 space-y-4">
           <label className="text-gray-400 text-sm block">
+            Name Your Capsule
+          </label>
+          <input
+            type="text"
+            className="w-full px-4 py-1 bg-transparent border-2 border-[#6771b9] rounded-xl text-purple-600 placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors duration-200"
+            placeholder="Capsule Name..."
+          />
+
+          <label className="text-gray-400 text-sm block">
             Unlock capsule in?
           </label>
           <input
             type="number"
-            className="w-full px-4 py-2 bg-transparent border-2 border-[#6771b9] rounded-xl text-purple-600 placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors duration-200"
-            placeholder="Enter time in days"
+            className="w-full px-4 py-1 bg-transparent border-2 border-[#6771b9] rounded-xl text-purple-600 placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors duration-200"
+            placeholder="Enter time in days..."
           />
           <motion.button
             whileHover={{ scale: 1.03 }}

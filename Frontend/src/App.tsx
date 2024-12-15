@@ -1,4 +1,5 @@
 import Home from "@/Pages/Home/Home";
+import AllCapsules from "@/Pages/AllCapsules/AllCapsules";
 import CreateCapsule from "@/Pages/CreateCapsule/CreateCapsule";
 import Navbar from "@/Pages/Nabar/Navbar";
 
@@ -15,6 +16,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Navbar />}>
           <Route path="/create" element={<CreateCapsule />} />
+          <Route path="/" element={<AllCapsules />} />
         </Route>
       </Routes>
       <Toaster />
