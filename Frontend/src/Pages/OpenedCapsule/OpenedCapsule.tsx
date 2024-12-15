@@ -51,7 +51,7 @@ const OpenedCapsule = () => {
           </motion.button>
         </div>
         {/*um this will be the text and images container*/}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        <div className="flex-1 scrollbar-thin scrollbar-thumb-[#6771b9] scrollbar-track-transparent scrollbar-thumb-rounded-full overflow-y-auto p-4 space-y-4">
           {/*the text container*/}
           <motion.div
             onClick={() => setIstext((state) => !state)}
@@ -127,6 +127,22 @@ const OpenedCapsule = () => {
               </svg>
             )}
           </motion.div>
+          {ispic ? (
+            <div className="flex justify-center items-center bg-gradient-to-tr from-gray-900 via-gray-800 to-[#6771b9] px-5 py-5 rounded-xl">
+              <img
+                className="rounded-xl max-h-60 max-w-60 m-2"
+                src="https://i.pinimg.com/474x/3f/8a/28/3f8a2802d72e02b43b2bb0e31b498aa0.jpg"
+              />
+              <img
+                className="rounded-xl max-h-60 max-w-60 m-2"
+                src="https://i.pinimg.com/474x/3f/8a/28/3f8a2802d72e02b43b2bb0e31b498aa0.jpg"
+              />
+              <img
+                className="rounded-xl max-h-60 max-w-60 m-2"
+                src="https://i.pinimg.com/474x/3f/8a/28/3f8a2802d72e02b43b2bb0e31b498aa0.jpg"
+              />
+            </div>
+          ) : null}
         </div>
       </div>
     </div>
