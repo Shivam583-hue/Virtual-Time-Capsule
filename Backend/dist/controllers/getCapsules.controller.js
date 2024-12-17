@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.capsule = exports.capsules = void 0;
+exports.getOpenedCapsule = exports.helperFunction = exports.capsules = void 0;
 const db_1 = require("../db");
 const drizzle_orm_1 = require("drizzle-orm");
 const schema_1 = require("../schema");
@@ -42,4 +42,49 @@ const capsules = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.capsules = capsules;
-exports.capsule = ((req, res) => __awaiter(void 0, void 0, void 0, function* () { }));
+const helperFunction = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const capsuleContent = yield db_1.db
+            .select({
+            id: schema_1.timeCapsules.id,
+            title: schema_1.timeCapsules.title,
+            notes: schema_1.timeCapsules.notes,
+            releaseDate: schema_1.timeCapsules.releaseDate,
+            image: schema_1.images.image,
+        })
+            .from(schema_1.timeCapsules)
+            .leftJoin(schema_1.images, (0, drizzle_orm_1.eq)(schema_1.images.capsuleId, schema_1.timeCapsules.id))
+            .where((0, drizzle_orm_1.eq)(schema_1.timeCapsules.id, id));
+        if (capsuleContent.length === 0) {
+            throw new Error("Capsule not found");
+        }
+        const formattedCapsule = {
+            id: capsuleContent[0].id,
+            title: capsuleContent[0].title,
+            notes: capsuleContent[0].notes,
+            releaseDate: capsuleContent[0].releaseDate,
+            images: capsuleContent
+                .map((row) => row.image)
+                .filter((image) => image !== null),
+        };
+        return formattedCapsule;
+    }
+    catch (error) {
+        console.error("Error fetching capsule with images:", error);
+        throw error;
+    }
+});
+exports.helperFunction = helperFunction;
+const getOpenedCapsule = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    try {
+        const capsuleContent = yield (0, exports.helperFunction)(id); // Fetch the capsule content
+        res.status(200).json({ success: true, data: capsuleContent });
+    }
+    catch (error) {
+        res
+            .status(500)
+            .json({ success: false, msg: "Error fetching capsule content" });
+    }
+});
+exports.getOpenedCapsule = getOpenedCapsule;

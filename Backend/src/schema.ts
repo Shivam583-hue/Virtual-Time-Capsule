@@ -1,5 +1,6 @@
 import { pgTable, varchar, text, timestamp } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
+import { boolean } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
   id: varchar("id", { length: 255 }).primaryKey(),
@@ -15,6 +16,7 @@ export const timeCapsules = pgTable("time_capsules", {
   title: varchar("title", { length: 255 }).notNull(),
   notes: text("description").notNull(),
   releaseDate: timestamp("release_date").notNull(),
+  released: boolean().default(false),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   ownerId: varchar("ownerId", { length: 255 })
     .references(() => users.id)

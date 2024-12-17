@@ -1,6 +1,6 @@
 import cron from "node-cron";
 import { db } from "./db";
-import { lte } from "drizzle-orm";
+import { lte, eq } from "drizzle-orm";
 import { timeCapsules } from "./schema";
 
 cron.schedule("* * * * *", async () => {
@@ -13,6 +13,10 @@ cron.schedule("* * * * *", async () => {
 
     for (const capsule of releasedCapsules) {
       console.log(`Capsule ${capsule.id} is now released!`);
+      await db
+        .update(timeCapsules)
+        .set({ released: true })
+        .where(eq(timeCapsules.id, capsule.id));
     }
   } catch (error) {
     console.error("Error processing time capsules:", error);

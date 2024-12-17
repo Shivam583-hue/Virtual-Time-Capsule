@@ -1,7 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.images = exports.timeCapsules = exports.users = void 0;
+exports.imagesRelations = exports.timeCapsulesRelations = exports.images = exports.timeCapsules = exports.users = void 0;
 const pg_core_1 = require("drizzle-orm/pg-core");
+const drizzle_orm_1 = require("drizzle-orm");
+const pg_core_2 = require("drizzle-orm/pg-core");
 exports.users = (0, pg_core_1.pgTable)("users", {
     id: (0, pg_core_1.varchar)("id", { length: 255 }).primaryKey(),
     googleId: (0, pg_core_1.text)("google_id").notNull(),
@@ -15,6 +17,7 @@ exports.timeCapsules = (0, pg_core_1.pgTable)("time_capsules", {
     title: (0, pg_core_1.varchar)("title", { length: 255 }).notNull(),
     notes: (0, pg_core_1.text)("description").notNull(),
     releaseDate: (0, pg_core_1.timestamp)("release_date").notNull(),
+    released: (0, pg_core_2.boolean)().default(false),
     createdAt: (0, pg_core_1.timestamp)("created_at").defaultNow().notNull(),
     ownerId: (0, pg_core_1.varchar)("ownerId", { length: 255 })
         .references(() => exports.users.id)
@@ -28,3 +31,12 @@ exports.images = (0, pg_core_1.pgTable)("images", {
     image: (0, pg_core_1.text)("image").notNull(),
     createdAt: (0, pg_core_1.timestamp)("created_at").defaultNow().notNull(),
 });
+exports.timeCapsulesRelations = (0, drizzle_orm_1.relations)(exports.timeCapsules, ({ many }) => ({
+    images: many(exports.images),
+}));
+exports.imagesRelations = (0, drizzle_orm_1.relations)(exports.images, ({ one }) => ({
+    capsule: one(exports.timeCapsules, {
+        fields: [exports.images.capsuleId],
+        references: [exports.timeCapsules.id],
+    }),
+}));

@@ -7,5 +7,5 @@ const express_1 = __importDefault(require("express"));
 const getCapsules_controller_1 = require("../controllers/getCapsules.controller");
 const router = express_1.default.Router();
 router.get("/capsules", getCapsules_controller_1.capsules);
-router.get("/capsule", getCapsules_controller_1.capsule);
+router.get("/capsule/:id", getCapsules_controller_1.getOpenedCapsule);
 exports.default = router;

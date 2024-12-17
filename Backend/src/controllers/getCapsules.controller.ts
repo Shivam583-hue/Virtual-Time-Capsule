@@ -38,7 +38,7 @@ export const capsules: express.RequestHandler = async (
   }
 };
 
-const helperFunction = async (id: string) => {
+export const helperFunction = async (id: string) => {
   try {
     const capsuleContent = await db
       .select({
@@ -46,20 +46,42 @@ const helperFunction = async (id: string) => {
         title: timeCapsules.title,
         notes: timeCapsules.notes,
         releaseDate: timeCapsules.releaseDate,
-        images: images.image,
+        image: images.image,
       })
       .from(timeCapsules)
       .leftJoin(images, eq(images.capsuleId, timeCapsules.id))
       .where(eq(timeCapsules.id, id));
 
-    return capsuleContent;
+    if (capsuleContent.length === 0) {
+      throw new Error("Capsule not found");
+    }
+
+    const formattedCapsule = {
+      id: capsuleContent[0].id,
+      title: capsuleContent[0].title,
+      notes: capsuleContent[0].notes,
+      releaseDate: capsuleContent[0].releaseDate,
+      images: capsuleContent
+        .map((row) => row.image)
+        .filter((image) => image !== null),
+    };
+
+    return formattedCapsule;
   } catch (error) {
     console.error("Error fetching capsule with images:", error);
     throw error;
   }
 };
 
-export const capsule = (async (
-  req: Request,
-  res: Response,
-) => {}) as express.RequestHandler;
+export const getOpenedCapsule = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const capsuleContent = await helperFunction(id); // Fetch the capsule content
+    res.status(200).json({ success: true, data: capsuleContent });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, msg: "Error fetching capsule content" });
+  }
+};
