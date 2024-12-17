@@ -5,6 +5,8 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import authRoute from "./routes/auth.route";
+import uploadRoute from "./routes/upload.route";
+import getCapsulesRoute from "./routes/getCapsules.route";
 
 dotenv.config();
 
@@ -29,6 +31,8 @@ app.use(
   }),
 );
 app.use("/api", authRoute);
+app.use("/api", uploadRoute);
+app.use("/api/get", getCapsulesRoute);
 
 app.get("/metrics", async (req, res) => {
   const metrics = await client.register.metrics();

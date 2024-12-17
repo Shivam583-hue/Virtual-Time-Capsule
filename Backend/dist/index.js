@@ -19,6 +19,8 @@ const express_1 = __importDefault(require("express"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const auth_route_1 = __importDefault(require("./routes/auth.route"));
+const upload_route_1 = __importDefault(require("./routes/upload.route"));
+const getCapsules_route_1 = __importDefault(require("./routes/getCapsules.route"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use((0, cookie_parser_1.default)());
@@ -39,6 +41,8 @@ app.use((0, cors_1.default)({
     optionsSuccessStatus: 204,
 }));
 app.use("/api", auth_route_1.default);
+app.use("/api", upload_route_1.default);
+app.use("/api/get", getCapsules_route_1.default);
 app.get("/metrics", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const metrics = yield prom_client_1.default.register.metrics();
     res.set("Content-Type", prom_client_1.default.register.contentType);
