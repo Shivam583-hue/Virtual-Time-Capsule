@@ -1,4 +1,5 @@
 import { pgTable, varchar, text, timestamp } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 
 export const users = pgTable("users", {
   id: varchar("id", { length: 255 }).primaryKey(),
@@ -28,6 +29,17 @@ export const images = pgTable("images", {
   image: text("image").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+export const timeCapsulesRelations = relations(timeCapsules, ({ many }) => ({
+  images: many(images),
+}));
+
+export const imagesRelations = relations(images, ({ one }) => ({
+  capsule: one(timeCapsules, {
+    fields: [images.capsuleId],
+    references: [timeCapsules.id],
+  }),
+}));
 
 export type InsertUserType = typeof users.$inferInsert;
 export type SelectUserType = typeof users.$inferSelect;

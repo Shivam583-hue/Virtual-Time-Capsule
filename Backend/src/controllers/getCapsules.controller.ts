@@ -2,7 +2,7 @@ import { db } from "../db";
 import { eq } from "drizzle-orm";
 import express from "express";
 import { Request, Response } from "express";
-import { timeCapsules } from "../schema";
+import { images, timeCapsules } from "../schema";
 
 export const capsules: express.RequestHandler = async (
   req,
@@ -35,6 +35,27 @@ export const capsules: express.RequestHandler = async (
       msg: "An error occurred while fetching user capsules.",
     });
     return;
+  }
+};
+
+const helperFunction = async (id: string) => {
+  try {
+    const capsuleContent = await db
+      .select({
+        id: timeCapsules.id,
+        title: timeCapsules.title,
+        notes: timeCapsules.notes,
+        releaseDate: timeCapsules.releaseDate,
+        images: images.image,
+      })
+      .from(timeCapsules)
+      .leftJoin(images, eq(images.capsuleId, timeCapsules.id))
+      .where(eq(timeCapsules.id, id));
+
+    return capsuleContent;
+  } catch (error) {
+    console.error("Error fetching capsule with images:", error);
+    throw error;
   }
 };
 
