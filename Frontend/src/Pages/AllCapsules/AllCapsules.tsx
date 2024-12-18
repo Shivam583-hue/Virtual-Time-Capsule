@@ -1,4 +1,5 @@
 import Capsule from "./Capsule";
+import { useState } from "react";
 
 const AllCapsules = () => {
   return (
