@@ -1,8 +1,25 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-const Capsule = () => {
+type Capsule = {
+  id: string;
+  title: string;
+  notes: string;
+  releaseDate: Date;
+  released: boolean;
+  createdAt: Date;
+  ownerId: string;
+};
+
+type Props = {
+  capsule: Capsule;
+};
+
+const Capsule = ({ capsule }: Props) => {
   const [unlocked, setUnlocked] = useState(false);
+  const title = capsule.title;
+  console.log(title);
+
   return (
     <div>
       <motion.div
