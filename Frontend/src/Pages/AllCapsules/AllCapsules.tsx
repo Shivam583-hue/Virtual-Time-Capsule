@@ -1,5 +1,4 @@
 import Capsule from "./Capsule";
-import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuthContext } from "@/context/AuthContext";
@@ -22,12 +21,11 @@ const AllCapsules = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const response = await axios.get(`${backendUrl}/capsules`, {
-          data: { userId: authUser?.id },
+        const response = await axios.get(`${backendUrl}/get/capsules`, {
+          params: { userId: authUser?.id },
         });
         setCapsule(response.data.data || []);
       } catch (error) {
-        toast.error("The server didn't respond, please try again later");
         console.error("Error : ", error);
       }
     };

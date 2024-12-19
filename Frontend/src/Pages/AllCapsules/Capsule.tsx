@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 
 export type Capsule = {
   id: string;
@@ -16,9 +15,15 @@ type Props = {
 };
 
 const Capsule = ({ capsule }: Props) => {
-  const [unlocked, setUnlocked] = useState(false);
+  let a: boolean = false;
+  if (capsule.released) {
+    a = false;
+  } else {
+    a = true;
+  }
+  const unlocked = a;
   const title = capsule.title;
-  console.log(title);
+  const releaseDate = new Date(capsule.releaseDate).toLocaleDateString();
 
   return (
     <div>
@@ -28,7 +33,7 @@ const Capsule = ({ capsule }: Props) => {
         className="flex justify-between items-center bg-gray-900 bg-opacity-80 w-full rounded-2xl px-4 py-2 shadow-md hover:shadow-lg transition-shadow duration-300"
       >
         <div className="flex flex-col">
-          <h2 className="text-lg font-semibold text-white">Capsule Name</h2>
+          <h2 className="text-lg font-semibold text-white">{title}</h2>
           {unlocked ? null : (
             <p className="text-sm text-purple-600">
               🎉🎉 Time Capsule has been unsealed!
@@ -38,7 +43,7 @@ const Capsule = ({ capsule }: Props) => {
         {unlocked ? (
           <div className="text-right">
             <h2 className="text-sm md:text-base text-gray-300">
-              Unlocking in: <span className="text-red-400">00:00:00</span>
+              Unlocking on: <span className="text-red-400">{releaseDate}</span>
             </h2>
           </div>
         ) : (

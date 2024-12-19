@@ -9,7 +9,7 @@ export const capsules: express.RequestHandler = async (
   res,
 ): Promise<void> => {
   try {
-    const { userId } = req.body;
+    const { userId } = req.query;
 
     if (!userId) {
       res.status(400).json({ success: false, msg: "User ID is required." });
@@ -21,10 +21,11 @@ export const capsules: express.RequestHandler = async (
         id: timeCapsules.id,
         title: timeCapsules.title,
         createdAt: timeCapsules.createdAt,
+        released: timeCapsules.released,
         releaseDate: timeCapsules.releaseDate,
       })
       .from(timeCapsules)
-      .where(eq(timeCapsules.ownerId, userId));
+      .where(eq(timeCapsules.ownerId, String(userId)));
 
     res.status(200).json({ success: true, data: userCapsules });
     return;

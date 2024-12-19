@@ -12,6 +12,7 @@ export const backendUrl = "http://localhost:5000/api";
 
 function App() {
   const { authUser } = useAuthContext();
+  console.log(authUser)
 
   return (
     <div className=" h-screen w-full bg-gradient-to-b from-gray-900 via-[#2A2640] to-[#1E1B2F]">
@@ -20,7 +21,7 @@ function App() {
         <Route path="/" element={<Navbar />}>
           <Route path="/create" element={<CreateCapsule />} />
           <Route path="/" element={<AllCapsules />} />
-          <Route path="/capsule" element={<OpenedCapsule />} />
+          <Route path="/capsule/:id" element={<OpenedCapsule />} />
         </Route>
       </Routes>
       <Toaster />

@@ -15,7 +15,7 @@ const drizzle_orm_1 = require("drizzle-orm");
 const schema_1 = require("../schema");
 const capsules = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { userId } = req.body;
+        const { userId } = req.query;
         if (!userId) {
             res.status(400).json({ success: false, msg: "User ID is required." });
             return;
@@ -25,10 +25,11 @@ const capsules = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             id: schema_1.timeCapsules.id,
             title: schema_1.timeCapsules.title,
             createdAt: schema_1.timeCapsules.createdAt,
+            released: schema_1.timeCapsules.released,
             releaseDate: schema_1.timeCapsules.releaseDate,
         })
             .from(schema_1.timeCapsules)
-            .where((0, drizzle_orm_1.eq)(schema_1.timeCapsules.ownerId, userId));
+            .where((0, drizzle_orm_1.eq)(schema_1.timeCapsules.ownerId, String(userId)));
         res.status(200).json({ success: true, data: userCapsules });
         return;
     }
