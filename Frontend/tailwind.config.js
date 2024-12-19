@@ -1,7 +1,7 @@
 import scrollbarPlugin from "tailwind-scrollbar";
+import daisyui from "daisyui";
 import animatePlugin from "tailwindcss-animate";
 
-/** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
@@ -61,8 +61,5 @@ export default {
       },
     },
   },
-  plugins: [
-    animatePlugin,
-    scrollbarPlugin({ nocompatible: true }), // Use the scrollbar plugin
-  ],
+  plugins: [daisyui, animatePlugin, scrollbarPlugin({ nocompatible: true })],
 };

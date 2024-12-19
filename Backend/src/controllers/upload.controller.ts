@@ -14,14 +14,10 @@ export const uploader: express.RequestHandler = async (
     if (!notes || !days || !title || !userId) {
       res
         .status(400)
-        .json({ success: false, message: "All fields are required." });
-      return;
-    }
-
-    if (!Array.isArray(imageArray) || imageArray.length === 0) {
-      res
-        .status(400)
-        .json({ success: false, message: "At least one image is required." });
+        .json({
+          success: false,
+          message: "Notes, title, days, and userId are required.",
+        });
       return;
     }
 
@@ -39,17 +35,19 @@ export const uploader: express.RequestHandler = async (
 
     await db.insert(timeCapsules).values(capsuleData);
 
-    const imagePromises = imageArray.map((image: string) => {
-      const imageData = {
-        id: uuidv4(),
-        capsuleId: capsuleId,
-        image: image,
-        createdAt: new Date(),
-      };
-      return db.insert(images).values(imageData);
-    });
+    if (Array.isArray(imageArray) && imageArray.length > 0) {
+      const imagePromises = imageArray.map((image: string) => {
+        const imageData = {
+          id: uuidv4(),
+          capsuleId: capsuleId,
+          image: image,
+          createdAt: new Date(),
+        };
+        return db.insert(images).values(imageData);
+      });
 
-    await Promise.all(imagePromises);
+      await Promise.all(imagePromises);
+    }
 
     res
       .status(201)

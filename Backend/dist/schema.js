@@ -15,7 +15,7 @@ exports.users = (0, pg_core_1.pgTable)("users", {
 exports.timeCapsules = (0, pg_core_1.pgTable)("time_capsules", {
     id: (0, pg_core_1.varchar)("id", { length: 255 }).primaryKey(),
     title: (0, pg_core_1.varchar)("title", { length: 255 }).notNull(),
-    notes: (0, pg_core_1.text)("description").notNull(),
+    notes: (0, pg_core_1.text)("notes").notNull(),
     releaseDate: (0, pg_core_1.timestamp)("release_date").notNull(),
     released: (0, pg_core_2.boolean)().default(false),
     createdAt: (0, pg_core_1.timestamp)("created_at").defaultNow().notNull(),

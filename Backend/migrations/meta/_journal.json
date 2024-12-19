@@ -15,6 +15,13 @@
       "when": 1734281372637,
       "tag": "0001_romantic_black_widow",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1734569560878,
+      "tag": "0002_dizzy_the_watchers",
+      "breakpoints": true
     }
   ]
 }

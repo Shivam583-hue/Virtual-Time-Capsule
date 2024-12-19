@@ -14,7 +14,7 @@ export const users = pgTable("users", {
 export const timeCapsules = pgTable("time_capsules", {
   id: varchar("id", { length: 255 }).primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
-  notes: text("description").notNull(),
+  notes: text("notes").notNull(),
   releaseDate: timestamp("release_date").notNull(),
   released: boolean().default(false),
   createdAt: timestamp("created_at").defaultNow().notNull(),

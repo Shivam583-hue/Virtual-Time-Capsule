@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-type Capsule = {
+export type Capsule = {
   id: string;
   title: string;
   notes: string;
