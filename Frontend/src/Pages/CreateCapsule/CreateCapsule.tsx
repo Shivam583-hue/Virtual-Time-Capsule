@@ -45,8 +45,6 @@ const CreateCapsule = () => {
       const binaryData = new Uint8Array(await file.arrayBuffer());
 
       setImages((prev) => [...prev, binaryData]);
-
-      // await uploadImage(binaryData);
     }
   };
 
@@ -81,7 +79,7 @@ const CreateCapsule = () => {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="h-[640px] rounded-xl w-full sm:w-[500px] md:w-[800px] bg-black bg-opacity-60 text-white shadow-lg flex flex-col">
+      <div className="h-[620px] rounded-xl w-full sm:w-[500px] md:w-[800px] bg-black bg-opacity-60 text-white shadow-lg flex flex-col">
         <div className="flex justify-around border-b border-[#6771b9] py-4">
           <h1
             onClick={handleText}

@@ -17,10 +17,16 @@ function App() {
     <div className=" h-screen w-full bg-gradient-to-b from-gray-900 via-[#2A2640] to-[#1E1B2F]">
       <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/" element={<Navbar />}>
-          <Route path="/create" element={<CreateCapsule />} />
-          <Route path="/" element={<AllCapsules />} />
-          <Route path="/capsule/:id" element={<OpenedCapsule />} />
+        <Route path="/" element={authUser ? <Navbar /> : <Home />}>
+          <Route
+            path="/create"
+            element={authUser ? <CreateCapsule /> : <Home />}
+          />
+          <Route path="/" element={authUser ? <AllCapsules /> : <Home />} />
+          <Route
+            path="/capsule/:id"
+            element={authUser ? <OpenedCapsule /> : <Home />}
+          />
         </Route>
       </Routes>
       <Toaster />
