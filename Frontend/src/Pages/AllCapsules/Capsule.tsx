@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 export type Capsule = {
   id: string;
   title: string;
+  images: string[];
   notes: string;
   releaseDate: Date;
   released: boolean;
@@ -15,15 +17,22 @@ type Props = {
 };
 
 const Capsule = ({ capsule }: Props) => {
-  let a: boolean = false;
-  if (capsule.released) {
-    a = false;
-  } else {
-    a = true;
-  }
+  const id = capsule.id;
+  const navigate = useNavigate();
+  const a: boolean = false;
+  console.log(capsule.released);
+  //if (capsule.released) {
+  //  a = false;
+  //} else {
+  //  a = true;
+  //}
   const unlocked = a;
   const title = capsule.title;
   const releaseDate = new Date(capsule.releaseDate).toLocaleDateString();
+
+  const redirect = () => {
+    navigate(`/capsule/${id}`);
+  };
 
   return (
     <div>
@@ -48,6 +57,7 @@ const Capsule = ({ capsule }: Props) => {
           </div>
         ) : (
           <motion.button
+            onClick={redirect}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="px-4 py-2 text-sm flex items-center md:text-base bg-[#6771b9] hover:bg-[#4d4f87] text-white rounded-full  shadow-lg shawdow-gray-700 transition-all duration-300"

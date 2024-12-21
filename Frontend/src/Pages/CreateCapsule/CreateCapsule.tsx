@@ -57,6 +57,7 @@ const CreateCapsule = () => {
 
   const handleSubmit2 = async () => {
     try {
+      console.log(images);
       const response = await axios.post(`${backendUrl}/upload-capsule`, {
         notes,
         userId,
@@ -71,9 +72,9 @@ const CreateCapsule = () => {
         console.error(response.data);
         setLoading(false);
       }
-    } catch (error) {
+    } catch (error: unknown) {
       toast.error("Server is not responding, please try again later");
-      console.error(error);
+      console.error(error.response.data);
       setLoading(false);
     }
   };

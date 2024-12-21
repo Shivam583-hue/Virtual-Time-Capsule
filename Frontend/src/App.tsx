@@ -12,7 +12,6 @@ export const backendUrl = "http://localhost:5000/api";
 
 function App() {
   const { authUser } = useAuthContext();
-  console.log(authUser)
 
   return (
     <div className=" h-screen w-full bg-gradient-to-b from-gray-900 via-[#2A2640] to-[#1E1B2F]">
