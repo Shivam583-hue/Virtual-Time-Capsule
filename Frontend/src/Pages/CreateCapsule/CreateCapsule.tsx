@@ -72,9 +72,9 @@ const CreateCapsule = () => {
         console.error(response.data);
         setLoading(false);
       }
-    } catch (error: unknown) {
+    } catch (error) {
       toast.error("Server is not responding, please try again later");
-      console.error(error.response.data);
+      console.error(error);
       setLoading(false);
     }
   };

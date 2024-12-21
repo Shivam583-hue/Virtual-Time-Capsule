@@ -16,16 +16,21 @@ const OpenedCapsule = () => {
 
   const { id } = useParams();
 
-  // Convert byte array to base64
+  const handleShare = () => {
+    const text =
+      "I just opened my digital time capsule! 🎉\nCheck out my memories and create your own at:";
+    const url = `https://timecapsule-website.com/capsule/${capsule?.id}`;
+    window.open(
+      `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=DigitalTimeCapsule,Memories`,
+      "_blank",
+    );
+  };
+
   const arrayBufferToBase64 = (buffer: { [key: string]: number }) => {
     try {
-      // Convert object to array
       const bytes = Object.values(buffer);
-      // Create Uint8Array from the bytes
       const uint8Array = new Uint8Array(bytes);
-      // Convert to blob
       const blob = new Blob([uint8Array], { type: "image/png" });
-      // Create URL from blob
       return URL.createObjectURL(blob);
     } catch (error) {
       console.error("Error converting image:", error);
@@ -42,21 +47,18 @@ const OpenedCapsule = () => {
         const response = await axios.get(`${backendUrl}/get/capsule/${id}`);
         setCapsule(response.data.data);
 
-        // Process images
         if (Array.isArray(response.data.data.images)) {
           const processedImages = response.data.data.images
             .map((imageData: string) => {
               try {
-                // Parse the stringified JSON object
                 const parsedData = JSON.parse(imageData);
-                // Convert to blob URL
                 return arrayBufferToBase64(parsedData);
               } catch (error) {
                 console.error("Error processing image:", error);
                 return null;
               }
             })
-            .filter(Boolean); // Remove any null values from failed conversions
+            .filter(Boolean);
 
           setImages(processedImages);
         }
@@ -69,7 +71,6 @@ const OpenedCapsule = () => {
     };
     fetch();
 
-    // Cleanup function to revoke object URLs
     return () => {
       images.forEach((url) => {
         if (url.startsWith("blob:")) {
@@ -107,12 +108,25 @@ const OpenedCapsule = () => {
         <div>
           <motion.button
             whileHover={{ scale: 1.07 }}
+            onClick={handleShare}
             whileTap={{ scale: 1 }}
             className="mt-4 ml-5 flex items-center focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 gap-2 px-4 py-2 
             rounded-2xl bg-gradient-to-r from-gray-700 to-gray-900 
             text-white font-bold shadow-lg
             hover:from-gray-600 hover:to-gray-800"
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              fill="none"
+              viewBox="0 0 1200 1227"
+            >
+              <path
+                fill="#fff"
+                d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z"
+              />
+            </svg>
             <span className="text-lg font-mono font-semibold">Share</span>
           </motion.button>
         </div>
