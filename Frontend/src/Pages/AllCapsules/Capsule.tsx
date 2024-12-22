@@ -19,13 +19,12 @@ type Props = {
 const Capsule = ({ capsule }: Props) => {
   const id = capsule.id;
   const navigate = useNavigate();
-  const a: boolean = false;
-  console.log(capsule.released);
-  //if (capsule.released) {
-  //  a = false;
-  //} else {
-  //  a = true;
-  //}
+  let a: boolean = false;
+  if (capsule.released) {
+    a = false;
+  } else {
+    a = true;
+  }
   const unlocked = a;
   const title = capsule.title;
   const releaseDate = new Date(capsule.releaseDate).toLocaleDateString();
