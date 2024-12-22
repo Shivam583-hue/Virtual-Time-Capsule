@@ -49,22 +49,10 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = document.cookie
-          .split('; ')
-          .find((row) => row.startsWith('token='))
-          ?.split('=')[1]; 
-    
-        if (!token) {
-          throw new Error("Token not found in cookies.");
-        }
-    
         const response = await axios.get(
           "https://samaycapsule.onrender.com/api/user/me",
           {
-            headers: {
-              Cookie: `token=${token}`, 
-            },
-            withCredentials: true, 
+            withCredentials: true,
           },
         );
         setAuthUser(response.data);
