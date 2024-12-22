@@ -49,9 +49,12 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/user/me", {
-          withCredentials: true,
-        });
+        const response = await axios.get(
+          "https://samaycapsule.onrender.com/api/user/me",
+          {
+            withCredentials: true,
+          },
+        );
         setAuthUser(response.data);
         localStorage.setItem(
           "time-capsule-user",
