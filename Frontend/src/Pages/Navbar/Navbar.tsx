@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.get("http://localhost:5000/api/logout", {
+      await axios.get("https://samaycapsule.onrender.com/api/logout", {
         withCredentials: true,
       });
       window.location.reload();

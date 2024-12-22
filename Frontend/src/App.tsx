@@ -8,7 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { useAuthContext } from "@/context/AuthContext";
 
-export const backendUrl = "http://localhost:5000/api";
+export const backendUrl = "https://samaycapsule.onrender.com/api";
 
 function App() {
   const { authUser } = useAuthContext();

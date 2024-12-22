@@ -10,14 +10,17 @@ const Login: React.FC = () => {
 
   const handleGoogleLogin = () => {
     setIsLoading(true);
-    window.location.href = "http://localhost:5000/api/auth/google";
+    window.location.href = "https://samaycapsule.onrender.com/api/auth/google";
   };
 
   const fetchUserData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/user/me", {
-        withCredentials: true,
-      });
+      const response = await axios.get(
+        "https://samaycapsule.onrender.com/api/user/me",
+        {
+          withCredentials: true,
+        },
+      );
       setAuthUser(response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
