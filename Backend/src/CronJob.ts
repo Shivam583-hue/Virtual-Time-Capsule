@@ -3,7 +3,7 @@ import { db } from "./db";
 import { lte, eq } from "drizzle-orm";
 import { timeCapsules } from "./schema";
 
-cron.schedule("* * * * *", async () => {
+cron.schedule("0 * * * *", async () => {
   try {
     const now = new Date();
     const releasedCapsules = await db
