@@ -96,7 +96,7 @@ const CreateCapsule = () => {
         </div>
         <div className="flex-1 p-4">
           {isFile ? (
-            <div className="flex justify-center items-center h-full">
+            <div className="relative flex justify-center items-center h-full">
               <motion.div
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 1 }}
@@ -122,6 +122,11 @@ const CreateCapsule = () => {
                 className="hidden"
                 onChange={handleFileChange}
               />
+              <div className="absolute top-4 right-4">
+                <h1 className="text-gray-400 font-mono font-semibold">
+                  Images Uploaded: <span>{images.length}</span>
+                </h1>
+              </div>
             </div>
           ) : (
             <textarea
