@@ -16,7 +16,7 @@ exports.controllerB = ((req, res) => {
         expiresIn: "30d",
     });
     res
-        .cookie("token", token, { httpOnly: true })
+        .cookie("token", token, { httpOnly: true, secure: true })
         .redirect(process.env.FRONTEND_URL);
 });
 const controllerC = (req, res) => {
