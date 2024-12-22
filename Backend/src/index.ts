@@ -16,7 +16,7 @@ app.use(express.json({ limit: "40mb" }));
 app.use(metricsMiddleware);
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://samaycapsule.vercel.app",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: [
@@ -41,4 +41,4 @@ app.get("/metrics", async (req, res) => {
   res.end(metrics);
 });
 
-app.listen(5000, () => console.log("Server running on http://localhost:5000"));
+app.listen(5000, () => console.log("Server running"));
