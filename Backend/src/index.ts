@@ -16,7 +16,7 @@ app.use(express.json({ limit: "40mb" }));
 app.use(metricsMiddleware);
 app.use(
   cors({
-    origin: "https://samaycapsule.vercel.app",
+    origin: "*",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: [

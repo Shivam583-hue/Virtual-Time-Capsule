@@ -14,7 +14,7 @@ export const controllerB = ((req: Request, res: Response) => {
   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
     expiresIn: "30d",
   });
-
+  
   res
     .cookie("token", token, { httpOnly: true ,secure:true})
     .redirect(process.env.FRONTEND_URL!);
