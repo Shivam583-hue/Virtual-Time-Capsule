@@ -27,7 +27,7 @@ app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json({ limit: "40mb" }));
 app.use(metrics_1.metricsMiddleware);
 app.use((0, cors_1.default)({
-    origin: "http://localhost:5173",
+    origin: "https://samaycapsule.vercel.app",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: [
@@ -49,4 +49,4 @@ app.get("/metrics", (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     res.set("Content-Type", prom_client_1.default.register.contentType);
     res.end(metrics);
 }));
-app.listen(5000, () => console.log("Server running on http://localhost:5000"));
+app.listen(5000, () => console.log("Server running"));

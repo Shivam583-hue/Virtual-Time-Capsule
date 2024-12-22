@@ -16,7 +16,7 @@ const node_cron_1 = __importDefault(require("node-cron"));
 const db_1 = require("./db");
 const drizzle_orm_1 = require("drizzle-orm");
 const schema_1 = require("./schema");
-node_cron_1.default.schedule("* * * * *", () => __awaiter(void 0, void 0, void 0, function* () {
+node_cron_1.default.schedule("0 * * * *", () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const now = new Date();
         const releasedCapsules = yield db_1.db
