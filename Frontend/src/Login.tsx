@@ -15,14 +15,25 @@ const Login: React.FC = () => {
 
   const fetchUserData = async () => {
     try {
+      const token = document.cookie
+        .split('; ')
+        .find((row) => row.startsWith('token='))
+        ?.split('=')[1]; 
+  
+      if (!token) {
+        throw new Error("Token not found in cookies.");
+      }
+  
       const response = await axios.get(
         "https://samaycapsule.onrender.com/api/user/me",
         {
-          withCredentials: true,
+          headers: {
+            Cookie: `token=${token}`, 
+          },
+          withCredentials: true, 
         },
       );
       setAuthUser(response.data);
-      console.log(response.data)
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
