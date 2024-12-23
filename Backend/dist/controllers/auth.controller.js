@@ -13,10 +13,10 @@ exports.controllerB = ((req, res) => {
         return res.status(401).send("Authentication failed");
     }
     const token = jsonwebtoken_1.default.sign({ id: user.id }, process.env.JWT_SECRET, {
-        expiresIn: "30d",
+        expiresIn: "30d"
     });
     res
-        .cookie("token", token, { httpOnly: true, secure: true })
+        .cookie("token", token, { httpOnly: true, secure: true, sameSite: "none" })
         .redirect(process.env.FRONTEND_URL);
 });
 const controllerC = (req, res) => {

@@ -63,6 +63,7 @@ router.get("/logout", auth_controller_1.controllerC);
 router.get("/user/me", ((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const token = req.cookies.token;
+        console.log(req.cookies.token);
         if (!token)
             return res.status(401).json({ message: "Unauthorized" });
         const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
